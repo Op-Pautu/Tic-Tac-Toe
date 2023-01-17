@@ -2,10 +2,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;
     height: 100vh;
+    background-color: #000;
+  color: #eee;
 }
-
+h1 {
+  font-size: 8rem;
+  font-family: "Rubik 80s Fade";
+  color: #fff;
+  margin-top: 2.4rem;
+  font-weight: 400;
+}
 #board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -20,7 +27,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-  
+  color: black;
     font-size: 48px;
     font-weight: bold;
     border: 1px solid #333;
