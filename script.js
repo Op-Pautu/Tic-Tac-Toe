@@ -2,6 +2,10 @@
 const Gameboard = {
   board: ['', '', '', '', '', '', '', '', ''],
   render: function() {
+    let cells = document.querySelectorAll(".cell");
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].remove();  //without this line the gameboard will keep replicating
+    }
     for (let i = 0; i < this.board.length; i++) {
       let cell = document.createElement("div");
       cell.classList.add("cell");
@@ -10,6 +14,7 @@ const Gameboard = {
       document.querySelector("#board").appendChild(cell);
     }
   },
+
   addMark: function(index, symbol) {
     if(this.board[index] === '') {
       this.board[index] = symbol;
@@ -38,11 +43,16 @@ const game = (function() {
       cells[i].innerHTML = Gameboard.board[i];
     }
   }
-  
+   // Initialize the game
+   function init() {
+    render();
+    document.querySelector("#board").addEventListener("click", play);
+    document.querySelector("#reset-button").addEventListener("click", restartGame)
+  }
   
   function play(event) {
     let cell = event.target;
-    if(!cell.innerHTML){
+    if(event.target === cell && !cell.innerHTML){
       let index = cell.getAttribute("data-index");
       Gameboard.addMark(index, currentPlayer.symbol);
         render();
@@ -102,21 +112,15 @@ const game = (function() {
       cells[i].style.pointerEvents = "auto";
     }
     document.querySelector("#winner").innerHTML = "";
+  
+
   }
   
   return {
-    play: play,
-    render: render,
-    checkWin: checkWin,
-    checkTie: checkTie,
-    showWinner: showWinner,
-    switchPlayer: switchPlayer,
-    disableBoard: disableBoard,
-    restartGame: restartGame
-  }
-})();
-// Listen for clicks on the gameboard
-document.querySelector("#board").addEventListener("click", game.play);
-
-// Render the initial gameboard
-game.render();
+    init: init,
+    render: render
+    };
+    })();
+    
+    // Start the game
+    game.init();
