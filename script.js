@@ -4,7 +4,7 @@ const Gameboard = {
   render: function() {
     let cells = document.querySelectorAll(".cell");
     for (let i = 0; i < cells.length; i++) {
-        cells[i].remove();  //without this line the gameboard will keep replicating
+      cells[i].remove();  //without this line the gameboard will keep replicating
     }
     for (let i = 0; i < this.board.length; i++) {
       let cell = document.createElement("div");
@@ -14,7 +14,7 @@ const Gameboard = {
       document.querySelector("#board").appendChild(cell);
     }
   },
-
+  
   addMark: function(index, symbol) {
     if(this.board[index] === '') {
       this.board[index] = symbol;
@@ -43,8 +43,8 @@ const game = (function() {
       cells[i].innerHTML = Gameboard.board[i];
     }
   }
-   // Initialize the game
-   function init() {
+  // Initialize the game
+  function init() {
     render();
     document.querySelector("#board").addEventListener("click", play);
     document.querySelector("#reset-button").addEventListener("click", restartGame)
@@ -55,10 +55,10 @@ const game = (function() {
     if(event.target === cell && !cell.innerHTML){
       let index = cell.getAttribute("data-index");
       Gameboard.addMark(index, currentPlayer.symbol);
-        render();
-        checkWin();
-        checkTie();
-        switchPlayer();
+      render();
+      checkWin();
+      checkTie();
+      switchPlayer();
     }
   }
   function checkWin() {
@@ -66,7 +66,7 @@ const game = (function() {
       [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
       [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
       [0, 4, 8], [2, 4, 6]  // diagonals
-  ];
+    ];
     for (let i = 0; i < winCombinations.length; i++) {
       let a = winCombinations[i][0];
       let b = winCombinations[i][1];
@@ -112,15 +112,16 @@ const game = (function() {
       cells[i].style.pointerEvents = "auto";
     }
     document.querySelector("#winner").innerHTML = "";
-  
-
+    
+    
   }
   
   return {
     init: init,
     render: render
-    };
-    })();
-    
-    // Start the game
-    game.init();
+  };
+})();
+
+  // Start the game
+  game.init();
+  
